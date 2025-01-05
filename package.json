@@ -9,32 +9,6 @@
     "dev": "nodemon src/app.js",
     "start": "node src/app.js"
   },
-  "eslintConfig": {
-    "extends": "airbnb-base",
-    "env": {
-      "es6": true,
-      "browser": true
-    },
-    "rules": {
-      "brace-style": [
-        "error",
-        "stroustrup"
-      ],
-      "comma-dangle": [
-        "error",
-        "never"
-      ],
-      "no-unused-vars": [
-        "warn"
-      ],
-      "no-var": [
-        "off"
-      ],
-      "one-var": [
-        "off"
-      ]
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
