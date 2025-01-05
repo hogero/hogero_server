@@ -12,8 +12,8 @@ mainRoutes.get('/agendas', async (req, res) => {
     const agendasReq = await dbPool.query(`
         SELECT *
         FROM agendas
-        WHERE fecha >= NOW()
-        AND fecha < DATE_ADD(NOW(), INTERVAL 5 MONTH)`);
+        WHERE fechaInicio >= NOW()
+        AND fechaInicio < DATE_ADD(NOW(), INTERVAL 5 MONTH)`);
     res.send(agendasReq[0]);
 })
 
