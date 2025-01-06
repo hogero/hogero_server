@@ -19,10 +19,10 @@ mainRoutes.get('/agendas', async (req, res) => {
 
 mainRoutes.post('/agenda', async (req, res) => {
     const data = req.body;
-    const fechaInicio = moment(data.fecha).format("YYYY-MM-DD HH:mm:ss");
+    const fechaInicio = moment(data.fecha).format("YYYY-MM-DD HH:00:00");
     const finalDate = new Date(data.fecha);
     finalDate.setHours(finalDate.getHours()+1+data.duracion);
-    const fechaFin = moment(finalDate.toISOString()).format("YYYY-MM-DD HH:mm:ss");
+    const fechaFin = moment(finalDate.toISOString()).format("YYYY-MM-DD HH:00:00");
     
     const [rowAgendas] = await dbPool.query(`
             SELECT *
