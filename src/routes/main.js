@@ -76,7 +76,7 @@ mainRoutes.post('/agenda', async (req, res) => {
         const [reqData] = await dbPool.query(`
         INSERT INTO agendas (nombre, telefono, email, fechaInicio, fechaFin, duracion, direccion, agendaId) 
         VALUES 
-        (?, ?, ?, ?, ?, ?)`,
+        (?, ?, ?, ?, ?, ?, ?, ?)`,
             [data.nombre, data.telefono, data.email, fechaInicio, fechaFin, data.duracion, data.direccion, agendaId]);
         res.send({
             id: reqData.insertId,
