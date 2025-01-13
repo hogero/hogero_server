@@ -20,7 +20,8 @@ mainRoutes.get('/agendas', async (req, res) => {
     } catch (error) {
         res.status(400).send({
             status: "E00",
-            message: error
+            error,
+            message: "Error al ejecutar consulta."
         });
     }
 
@@ -37,7 +38,8 @@ mainRoutes.get('/agenda', async (req, res) => {
     } catch (error) {
         res.status(400).send({
             status: "E00",
-            message: error
+            error,
+            message: "Error al ejecutar consulta."
         });
     }
 })
@@ -57,7 +59,7 @@ mainRoutes.post('/agenda', async (req, res) => {
         if (rowAgendas.length > 0) {
             res.status(400).send({
                 status: "E01",
-                message: "Ya existe una agenda con esa fecha"
+                message: "Ya existe una agenda con esa fecha."
             })
             return;
         }
@@ -77,7 +79,8 @@ mainRoutes.post('/agenda', async (req, res) => {
     } catch (error) {
         res.status(400).send({
             status: "E00",
-            message: error
+            error,
+            message: "Error al ejecutar consulta."
         });
     }
 
