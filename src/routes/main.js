@@ -1,7 +1,7 @@
 import express from "express";
 import { dbPool } from "../db.js"
 import moment from "moment";
-import { generateUniqueCode } from "../utils.js";
+import { generateUniqueCode, isFutureDate } from "../utils.js";
 
 const mainRoutes = express.Router();
 
@@ -47,6 +47,13 @@ mainRoutes.get('/agenda', async (req, res) => {
 mainRoutes.post('/agenda', async (req, res) => {
     try {
         const data = req.body;
+        if(!isFutureDate(data.fechaInicio)){
+            res.status(400).send({
+                status: "E02",
+                message: "Solo fechas mayores a hoy."
+            })
+            return;
+        }
         const fechaInicio = moment(data.fechaInicio).format("YYYY-MM-DD HH:00:00");
         const finalDate = new Date(data.fechaInicio);
         finalDate.setHours(finalDate.getHours() + 1 + data.duracion);

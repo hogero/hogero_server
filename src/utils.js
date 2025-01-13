@@ -16,3 +16,9 @@ export function generateUniqueCode() {
 
     return code.join('');
 }
+
+export function isFutureDate(date) {
+    const currentDate = new Date();
+    const inputDate = new Date(date);
+    return inputDate > currentDate;
+}
