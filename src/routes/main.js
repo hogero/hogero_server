@@ -10,12 +10,20 @@ mainRoutes.get('/', (req, res) => {
 })
 
 mainRoutes.get('/agendas', async (req, res) => {
-    const agendasReq = await dbPool.query(`
-        SELECT fechaInicio,fechaFin,duracion
-        FROM agendas
-        WHERE fechaInicio >= NOW()
-        AND fechaInicio < DATE_ADD(NOW(), INTERVAL 5 MONTH)`);
-    res.send(agendasReq[0]);
+    try {
+        const agendasReq = await dbPool.query(`
+            SELECT fechaInicio,fechaFin,duracion
+            FROM agendas
+            WHERE fechaInicio >= NOW()
+            AND fechaInicio < DATE_ADD(NOW(), INTERVAL 5 MONTH)`);
+        res.send(agendasReq[0]);
+    } catch (error) {
+        res.status(400).send({
+            status: "E02",
+            message: error
+        });
+    }
+
 })
 
 mainRoutes.get('/agenda', async (req, res) => {
