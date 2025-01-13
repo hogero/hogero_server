@@ -71,7 +71,7 @@ mainRoutes.post('/agenda', async (req, res) => {
             return;
         }
 
-        const agendaId = generateUniqueCode();
+        const agendaId = generateUniqueCode(data.fechaInicio);
 
         const [reqData] = await dbPool.query(`
         INSERT INTO agendas (nombre, telefono, email, fechaInicio, fechaFin, duracion, direccion, agendaId) 
