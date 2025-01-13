@@ -35,7 +35,7 @@ mainRoutes.post('/agenda', async (req, res) => {
     const fechaFin = moment(finalDate.toISOString()).format("YYYY-MM-DD HH:00:00");
 
     const [rowAgendas] = await dbPool.query(`
-            SELECT *
+            SELECT id
             FROM agendas
             WHERE ? >= fechaInicio AND  ? < fechaFin`, [fechaInicio, fechaInicio]);
     if (rowAgendas.length > 0) {
