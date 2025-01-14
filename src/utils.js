@@ -5,7 +5,7 @@ export function generateUniqueCode(fechaInicio) {
     const day = String(date.getDate()).padStart(2, '0');
     const hours = String(date.getHours()).padStart(2, '0');
     const getRandomLetter = () => String.fromCharCode(65 + Math.floor(Math.random() * 26));
-    let code = `${year}${month}${day}${getRandomLetter()}${getRandomLetter()}${hours}`;
+    let code = `${getRandomLetter()}${getRandomLetter()}${year}${month}${day}${hours}`;
 
     code = code.split('');
 
