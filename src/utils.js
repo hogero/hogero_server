@@ -6,15 +6,15 @@ export function generateUniqueCode(fechaInicio) {
     const hours = String(date.getHours()).padStart(2, '0');
     const getRandomLetter = () => String.fromCharCode(65 + Math.floor(Math.random() * 26));
     let code = `${getRandomLetter()}${getRandomLetter()}${year}${month}${day}${hours}`;
+    /* 
+        code = code.split('');
+    
+        for (let i = code.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [code[i], code[j]] = [code[j], code[i]]; // Intercambiar elementos
+        } */
 
-    code = code.split('');
-
-    for (let i = code.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [code[i], code[j]] = [code[j], code[i]]; // Intercambiar elementos
-    }
-
-    return code.join('');
+    return code;
 }
 
 export function isFutureDate(date) {
