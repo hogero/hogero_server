@@ -45,6 +45,7 @@ mainRoutes.get('/agenda', async (req, res) => {
 })
 
 mainRoutes.post('/agenda', async (req, res) => {
+    const HRS_EXT = 2;
     try {
         const data = req.body;
         if(!isFutureDate(data.fechaInicio)){
@@ -56,7 +57,7 @@ mainRoutes.post('/agenda', async (req, res) => {
         }
         const fechaInicio = moment(data.fechaInicio).format("YYYY-MM-DD HH:00:00");
         const finalDate = new Date(data.fechaInicio);
-        finalDate.setHours(finalDate.getHours() + 1 + data.duracion);
+        finalDate.setHours(finalDate.getHours() + HRS_EXT + data.duracion);
         const fechaFin = moment(finalDate.toISOString()).format("YYYY-MM-DD HH:00:00");
 
         const [rowAgendas] = await dbPool.query(`
@@ -77,7 +78,7 @@ mainRoutes.post('/agenda', async (req, res) => {
         INSERT INTO agendas (nombre, telefono, email, fechaInicio, fechaFin, duracion, direccion, agendaId, confirmacion) 
         VALUES 
         (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [data.nombre, data.telefono, data.email, fechaInicio, fechaFin, data.duracion, data.direccion, agendaId, false]);
+            [data.nombre, data.telefono, data.email, fechaInicio, fechaFin, data.duracion+HRS_EXT, data.direccion, agendaId, false]);
         res.send({
             id: reqData.insertId,
             agendaId: agendaId
