@@ -75,10 +75,10 @@ mainRoutes.post('/agenda', async (req, res) => {
         const agendaId = generateUniqueCode(data.fechaInicio);
 
         const [reqData] = await dbPool.query(`
-        INSERT INTO agendas (nombre, telefono, email, fechaInicio, fechaFin, duracion, direccion, agendaId, confirmacion, nombrePlan) 
+        INSERT INTO agendas (nombre, telefono, email, fechaInicio, fechaFin, duracion, direccion, agendaId, confirmacion, planData) 
         VALUES 
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [data.nombre, data.telefono, data.email, fechaInicio, fechaFin, data.duracion+HRS_EXT, data.direccion, agendaId, false, data.nombrePlan]);
+            [data.nombre, data.telefono, data.email, fechaInicio, fechaFin, data.duracion+HRS_EXT, data.direccion, agendaId, false, data.planData]);
         res.send({
             id: reqData.insertId,
             agendaId: agendaId
