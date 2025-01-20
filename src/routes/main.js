@@ -48,7 +48,7 @@ mainRoutes.post('/agenda', async (req, res) => {
     const HRS_EXT = 2;
     try {
         const data = req.body;
-        if(!isFutureDate(data.fechaInicio)){
+        if (!isFutureDate(data.fechaInicio)) {
             res.status(400).send({
                 status: "E02",
                 message: "Solo fechas mayores a hoy."
@@ -78,7 +78,9 @@ mainRoutes.post('/agenda', async (req, res) => {
         INSERT INTO agendas (nombre, telefono, email, fechaInicio, fechaFin, duracion, direccion, agendaId, confirmacion, planData) 
         VALUES 
         (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [data.nombre, data.telefono, data.email, fechaInicio, fechaFin, data.duracion+HRS_EXT, data.direccion, agendaId, false, data.planData]);
+            [data.nombre, data.telefono, data.email, fechaInicio,
+                fechaFin, data.duracion + HRS_EXT, data.direccion,
+                agendaId, false, JSON.stringify(data.planData)]);
         res.send({
             id: reqData.insertId,
             agendaId: agendaId
