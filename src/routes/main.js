@@ -11,7 +11,7 @@ mainRoutes.get('/', (req, res) => {
 
 mainRoutes.get('/services', async (req, res) => {
     try {
-        const agendasReq = await dbPool.query(`SELECT * FROM hogero.services`);
+        const agendasReq = await dbPool.query(`SELECT * FROM services`);
         const data = agendasReq[0].map(el => {
             const hr = el.duration == 1 ? " hora" : " horas";
             el.features.unshift(el.duration + hr)
