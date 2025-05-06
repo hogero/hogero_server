@@ -9,6 +9,25 @@ mainRoutes.get('/', (req, res) => {
     res.send("Hola");
 })
 
+mainRoutes.get('/services', async (req, res) => {
+    try {
+        const agendasReq = await dbPool.query(`SELECT * FROM hogero.services`);
+        const data = agendasReq[0].map(el => {
+            const hr = el.duration == 1 ? " hora" : " horas";
+            el.features.unshift(el.duration + hr)
+            return el;
+        })
+        res.send(data);
+    } catch (error) {
+        res.status(400).send({
+            status: "E00",
+            error,
+            message: "Error al ejecutar consulta."
+        });
+    }
+
+})
+
 mainRoutes.get('/agendas', async (req, res) => {
     try {
         const agendasReq = await dbPool.query(`
